@@ -76,11 +76,19 @@
 (scroll-down (or n 1))))
 
 (global-set-key (kbd "C-c C-;") 'comment-or-uncomment-region)
+(global-set-key (kbd "M-w") 'copy-regin-as-kill)
 ;; cc-mode
-(setq c-default-style '((java-mode . "java")
-			(other . "linux")))
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
+;;(require 'google-c-style)
+;;(add-hook 'c-mode-common-hook 'google-set-c-style)
+(setq-default c-basic-offset 4)
+;;(setq c-default-style "linux" c-basic-offset 4)
+;;(setq c-default-style '((java-mode . "java")
+;;			(other . "linux")))
+
+
+;; python mode
+(require 'python-mode)
+
 ;; cedet
 (load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
 (semantic-load-enable-code-helpers)
@@ -100,23 +108,34 @@
 	       ("\\.tcc$" . c++-mode)
 	       ("\\.hpp$" . c++-mode))
 	      auto-mode-alist))
-;; python mode
-(require 'python-mode)
+
 ;; ecb
-(setq stack-trace-on-error t)
+;;(setq stack-trace-on-error t)
 (require 'ecb)
 ;;(ecb-activate)
 ;;(ecb-byte-compile)
+(setq sys-include-dir "/usr/include")
+(ede-cpp-root-project "kknf"
+                :name "kknf"
+                :file "e:/source/kknf/zxb_ios/Makefile"
+                :include-path '("e:/source/kknf/")
+                :system-include-path '("/usr/include")
+                :spp-table '(("isUnix" . "")
+                             ("BOOST_TEST_DYN_LINK" . "")))
+(semantic-add-system-include sys-include-dir 'c++-mode)
+(add-to-list 'auto-mode-alist (cons sys-include-dir 'c++-mode))
+(add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat sys-include-dir "stdlib.h"))
+
 (setq ecb-tip-of-the-day nil)
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ecb-source-path (quote ("/Users/zhouxiaobo/source/nginx-1.3.4/" "/Users/zhouxiaobo/source/kknf/" "/Users/zhouxiaobo/source/vthis/"))))
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ecb-source-path (quote ("e:/source/kknf/" "e:/tencent-sources/common/" "e:/source/redis-2.4.17/" "e:/source/libev-4.11/"))))
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  )
