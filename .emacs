@@ -115,13 +115,7 @@
 ;;(ecb-activate)
 ;;(ecb-byte-compile)
 (setq sys-include-dir "/usr/include")
-(ede-cpp-root-project "kknf"
-                :name "kknf"
-                :file "e:/source/kknf/zxb_ios/Makefile"
-                :include-path '("e:/source/kknf/")
-                :system-include-path '("/usr/include")
-                :spp-table '(("isUnix" . "")
-                             ("BOOST_TEST_DYN_LINK" . "")))
+
 (semantic-add-system-include sys-include-dir 'c++-mode)
 (add-to-list 'auto-mode-alist (cons sys-include-dir 'c++-mode))
 (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat sys-include-dir "stdlib.h"))
@@ -132,7 +126,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(ecb-source-path (quote ("e:/source/kknf/" "e:/tencent-sources/common/" "e:/source/redis-2.4.17/" "e:/source/libev-4.11/"))))
+ '(ecb-source-path (quote ("~/source/kknf/"  "~/source/redis-2.4.17/" "~/source/libev-4.11/"))))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
