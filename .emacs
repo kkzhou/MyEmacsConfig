@@ -91,6 +91,7 @@
 
 ;; cedet
 (load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
+(setq stack-trace-on-error nil)
 (semantic-load-enable-code-helpers)
 (require 'semantic-ia)
 (require 'semantic-gcc)
