@@ -91,10 +91,16 @@
 
 ;; cedet
 (load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
-(setq stack-trace-on-error nil)
-(semantic-load-enable-code-helpers)
+(require 'cedet)
+(require 'eieio-opt)
 (require 'semantic-ia)
 (require 'semantic-gcc)
+(require 'gdb-mi)
+(setq stack-trace-on-error nil)
+(semantic-load-enable-code-helpers)
+(setq semantic-highlight-func-mode t)
+(unless (boundp 'xmax-tooltip-size)
+ (setq x-max-tooltip-size '(80 . 40)))
 
 (defun my-cedet-hook ()
   (local-set-key [(control return)] 'semantic-ia-complete-symbol)
@@ -123,14 +129,14 @@
 
 (setq ecb-tip-of-the-day nil)
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ecb-source-path (quote ("~/source/kknf/"  "~/source/redis-2.4.17/" "~/source/libev-4.11/"))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ecb-source-path (quote ("~/source/kknf/" "~/source/nginx-1.3.4" "~/source/leveldb"))))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
