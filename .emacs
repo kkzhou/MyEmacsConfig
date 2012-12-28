@@ -89,6 +89,9 @@
 ;; python mode
 (require 'python-mode)
 
+;; cscope
+(load-library "xcscope.el")
+(require 'xcscope)
 ;; cedet
 (load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
 (require 'cedet)
