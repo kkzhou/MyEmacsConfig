@@ -78,12 +78,13 @@
 (global-set-key (kbd "C-c C-;") 'comment-or-uncomment-region)
 (global-set-key (kbd "M-w") 'copy-region-as-kill)
 ;; cc-mode
-;;(require 'google-c-style)
+(require 'google-c-style)
 ;;(add-hook 'c-mode-common-hook 'google-set-c-style)
 (setq-default c-basic-offset 4)
-;;(setq c-default-style "linux" c-basic-offset 4)
-;;(setq c-default-style '((java-mode . "java")
-;;			(other . "linux")))
+(setq c-default-style "linux" c-basic-offset 4)
+(setq c-default-style '((java-mode . "java")
+			(other . "linux")))
+(global-set-key [C-backspace] 'c-hungry-backspace)
 
 
 ;; python mode
