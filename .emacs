@@ -66,7 +66,7 @@
 ;;goto a line
 (global-set-key "\M-g" 'goto-line)
 ;;backspace
-(global-set-key (kbd "C-;") 'backward-delete-char)
+;;(global-set-key (kbd "C-;") 'backward-kill-word)
 ;;highlight the region when marked
 (transient-mark-mode t)
 ;;scroll line-by-line without move the cursor
@@ -77,6 +77,12 @@
 
 (global-set-key (kbd "C-c C-;") 'comment-or-uncomment-region)
 (global-set-key (kbd "M-w") 'copy-region-as-kill)
+(global-set-key [C-backspace] 'backward-kill-word)
+;;(global-set-key [backspace] 'c-hungry-backspace)
+
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "/Users/zhouxiaobo/.emacs.d//ac-dict")
+(ac-config-default)
 ;; cc-mode
 (require 'google-c-style)
 ;;(add-hook 'c-mode-common-hook 'google-set-c-style)
@@ -84,8 +90,6 @@
 (setq c-default-style "linux" c-basic-offset 4)
 (setq c-default-style '((java-mode . "java")
 			(other . "linux")))
-(global-set-key [C-backspace] 'c-hungry-backspace)
-
 
 ;; python mode
 (require 'python-mode)
@@ -139,7 +143,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ecb-source-path (quote ("~/source/kknf/" "~/source/nginx-1.3.4" "~/source/leveldb" "~/source/tmp/" "~/source/boost-trunk/" "/Users/zhouxiaobo/source/linux-3.6.11")))
+ '(ecb-source-path (quote ("~/source/kknf/" "~/source/nginx-1.3.4" "~/source/leveldb" "~/source/tmp/" "~/source/boost-trunk/" "/Users/zhouxiaobo/source/linux-3.6.11" "~/source/go/")))
  '(gdb-many-windows t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
