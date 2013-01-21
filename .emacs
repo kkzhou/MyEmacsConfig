@@ -80,9 +80,12 @@
 (global-set-key [C-backspace] 'backward-kill-word)
 ;;(global-set-key [backspace] 'c-hungry-backspace)
 
+(require 'go-autocomplete)
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "/Users/zhouxiaobo/.emacs.d//ac-dict")
 (ac-config-default)
+;; go-mode
+(require 'go-mode-load)
 ;; cc-mode
 (require 'google-c-style)
 ;;(add-hook 'c-mode-common-hook 'google-set-c-style)
