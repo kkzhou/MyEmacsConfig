@@ -79,7 +79,7 @@
 (unless (boundp 'xmax-tooltip-size)
 (setq x-max-tooltip-size '(80 . 40)))
 (semantic-add-system-include "~/program/boost/" 'c++-mode)
-(semantic-add-system-include "/usr/include/" 'c++-mode)
+(semantic-add-system-include "/usr/include/")
 
 (defun my-cedet-hook ()
   (local-set-key [(control return)] 'semantic-ia-complete-symbol)
@@ -98,7 +98,7 @@
 	      auto-mode-alist))
 
 ;; ecb
-(setq ecb-source-path '("~/source/nginx-1.5.6/" "~/source/boost-trunk"))
+(setq ecb-source-path '("~/source/nginx-1.5.6/" "~/source/boost-trunk" "~/source/redis-2.8.3"))
 (setq stack-trace-on-error t)
 (setq ecb-tip-of-the-day nil)
 (require 'ecb)
