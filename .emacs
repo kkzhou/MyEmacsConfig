@@ -58,20 +58,28 @@
 (require 'auto-complete-config)
 (ac-config-default)
 ;; cc-mode
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
 (setq-default c-basic-offset 4)
 (setq c-default-style "linux" c-basic-offset 4)
 (setq c-default-style '((java-mode . "java")
 			(other . "linux")))
 
-(load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
-(semantic-load-enable-code-helpers)
+(require 'cedet)
+(require 'semantic/bovine/gcc)
+(require 'semantic/ia)
+(require 'semantic/analyze)
+(provide 'semantic-analyze)
+(provide 'semantic-ctxt)
+(provide 'semanticdb)
+(provide 'semanticdb-find)
+(provide 'semanticdb-mode)
+(provide 'semantic-load)
+(semantic-mode 1)
+
 (setq semantic-highlight-func-mode t)
 (unless (boundp 'xmax-tooltip-size)
 (setq x-max-tooltip-size '(80 . 40)))
 (semantic-add-system-include "~/program/boost/" 'c++-mode)
-(require 'semantic-ia)
+(semantic-add-system-include "/usr/include/" 'c++-mode)
 
 (defun my-cedet-hook ()
   (local-set-key [(control return)] 'semantic-ia-complete-symbol)
@@ -79,6 +87,7 @@
   (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
   (local-set-key "\C-c,d" 'semantic-ia-fast-jump)
+  (local-set-key "\C-c,c" 'semantic-symref-symbol)
   (setq buffer-read-only t))
 
 (add-hook 'c-mode-common-hook 'my-cedet-hook)
@@ -89,29 +98,10 @@
 	      auto-mode-alist))
 
 ;; ecb
+(setq ecb-source-path '("~/source/nginx-1.5.6/" "~/source/boost-trunk"))
 (setq stack-trace-on-error t)
 (setq ecb-tip-of-the-day nil)
 (require 'ecb)
 (ecb-activate)
 (setq ecb-primary-secondary-mouse-buttons 'mouse-1--mouse-2)
-;; ede
-(global-ede-mode 1)
-;;(ede-cpp-root-project "nginx"
-;; :name "nginx-src"
-;; :file "~/source/nginx-1.5.6/README"
-;; :system-include-path '("/usr//include")
-;; :spp-table '(("isUnix" . "")
-;;         ("BOOST_TEST_DYN_LINK" . "")))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ecb-source-path (quote ("~/source/nginx-1.5.6/")))
- '(ede-project-directories (quote ("/Users/zhouxiaobo/source/test"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
