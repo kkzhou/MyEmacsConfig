@@ -81,6 +81,7 @@
 (semantic-add-system-include "~/program/boost/" 'c++-mode)
 (semantic-add-system-include "/usr/include/")
 
+
 (defun my-cedet-hook ()
   (local-set-key [(control return)] 'semantic-ia-complete-symbol)
   (local-set-key "\C-c?" 'semantic-ia-complete-symbol-menu)
@@ -88,17 +89,23 @@
   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
   (local-set-key "\C-c,d" 'semantic-ia-fast-jump)
   (local-set-key "\C-c,c" 'semantic-symref-symbol)
+
+  (local-set-key (kbd "<f4>") 'semantic-complete-analyze-inline)
+  (local-set-key (kbd "<f5>") 'semantic-analyze-proto-impl-toggle)
+  (local-set-key (kbd "<f6>") 'semantic-ia-fast-jump)
+  (local-set-key (kbd "<f7>") 'semantic-symref-symbol)
   (setq buffer-read-only t))
 
 (add-hook 'c-mode-common-hook 'my-cedet-hook)
 (setq auto-mode-alist 
       (append '(("\\.cc$" . c++-mode)
 	       ("\\.tcc$" . c++-mode)
+	       ("\\.cpp$" . c++-mode)
 	       ("\\.hpp$" . c++-mode))
 	      auto-mode-alist))
 
 ;; ecb
-(setq ecb-source-path '("~/source/nginx-1.5.6/" "~/source/boost-trunk" "~/source/redis-2.8.3"))
+(setq ecb-source-path '("~/source/nginx-1.5.6/" "~/source/boost-trunk" "~/source/redis-2.8.3" "~/source/linux-3.6.11/"))
 (setq stack-trace-on-error t)
 (setq ecb-tip-of-the-day nil)
 (require 'ecb)
