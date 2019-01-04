@@ -36,8 +36,10 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
+(semantic-mode 0)
 ;;(global-hl-line-mode 1)
 
+(require 'dired)
 (require 'setup-ggtags)
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
@@ -47,8 +49,8 @@
 (require 'maxframe)
 ;;(setq mf-max-width 1018)
 ;;(setq mf-max-height 730)
-(maximize-frame t)
-;;(add-hook 'window-setup-hook 'maximize-frame t)
+;;(maximize-frame t)
+(add-hook 'window-setup-hook 'maximize-frame t)
 ;; color-theme
 (require 'color-theme)
 (color-theme-initialize)
