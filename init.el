@@ -8,7 +8,7 @@
   (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
-(add-to-list 'load-path "~/.emacs.d/custom")
+;;(add-to-list 'load-path "~/.emacs.d/custom")
 
 
 ;; basic setup
@@ -36,45 +36,90 @@
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
-(semantic-mode 0)
-;;(global-hl-line-mode 1)
 
-(require 'dired)
-(require 'setup-ggtags)
+(require 'sr-speedbar)
+(setq sr-speedbar-skip-other-window-p t)
+(setq sr-speedbar-max-width 20)
+;;(global-hl-line-mode 1)
+(semantic-mode 0)
+
+(require 'cc-mode)
+(require 'function-args)
 (require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
+(require 'ggtags)
+(require 'dired)
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
+              (ggtags-mode 1)
+	      (company-mode 1)
+	      (fa-config-default))))
+(define-key c-mode-map  [(tab)] 'company-complete)
+(define-key c++-mode-map  [(tab)] 'company-complete)
+
+(dolist (map (list ggtags-mode-map dired-mode-map))
+  (define-key map (kbd "C-c g s") 'ggtags-find-other-symbol)
+  (define-key map (kbd "C-c g h") 'ggtags-view-tag-history)
+  (define-key map (kbd "C-c g r") 'ggtags-find-reference)
+  (define-key map (kbd "<f5>") 'ggtags-find-reference)
+  (define-key map (kbd "C-c g f") 'ggtags-find-file)
+  (define-key map (kbd "C-c g c") 'ggtags-create-tags)
+  (define-key map (kbd "C-c g u") 'ggtags-update-tags)
+  (define-key map (kbd "C-c g d") 'ggtags-find-definition)
+  (define-key map (kbd "<f6>") 'ggtags-find-definition)
+  (define-key map (kbd "<f8>") 'ggtags-find-tag-dwim)
+  (define-key map (kbd "<f7>") 'pop-tag-mark)
+  (define-key map (kbd "C-c <") 'ggtags-prev-mark)
+  (define-key map (kbd "C-c >") 'ggtags-next-mark))
+
+
 
 ;; plugins
 ;; maxframe
 (require 'maxframe)
 ;;(setq mf-max-width 1018)
 ;;(setq mf-max-height 730)
-;;(maximize-frame t)
 (add-hook 'window-setup-hook 'maximize-frame t)
 ;; color-theme
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-classic)
 
-;; function-args
-(require 'cc-mode)
-(require 'function-args)
-(fa-config-default)
-(define-key c-mode-map  [(tab)] 'company-complete)
-(define-key c++-mode-map  [(tab)] 'company-complete)
+
+;; golang
+(require 'go-autocomplete)
+(require 'go-eldoc)
+(require 'go-mode)
+(require 'auto-complete-config)
+(require 'golint)
+(require 'go-guru)
+
+(defun go-mode-setup()
+  (go-eldoc-setup)
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (local-set-key (kbd "<f2>") 'godef-jump)
+  (local-set-key (kbd "<f3>") 'pop-tag-mark)
+  (auto-complete-mode 1))
+
+(add-hook 'go-mode-hook 'go-mode-setup)
+(with-eval-after-load 'go-mode
+  (require 'go-autocomplete))
 
 
-(custom-set-variables
+
+;;(custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (sr-speedbar maxframe git ggtags function-args company-go company-c-headers color-theme))))
-(custom-set-faces
+;; '(package-selected-packages
+;;   (quote
+;;    (sr-speedbar maxframe git ggtags function-args company-go company-c-headers color-theme))))
+;;(custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+;; )
